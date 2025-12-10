@@ -1,0 +1,14 @@
+indicator_id,display,country,category,start,end,rows
+crude_oil,Crude Oil Price,Global,Commodities,1990-01,2025-06,426
+in_fx_spot,INR/USD FX Spot,India,Currencies,1973-01,2025-11,635
+in_production,India: Industrial Production,India,Growth,1994-04,2023-01,346
+in_cpi,India: CPI Inflation,India,Inflation,1957-01,2025-03,819
+in_policy_rate,India: Policy Repo Rate,India,Interest Rates,1968-01,2023-12,672
+in_m3,India: M3 Money Supply,India,Money Supply,1960-01,2018-12,708
+us_10y,US: 10Y Treasury Yield,US,Bond Market,1962-01,2025-12,768
+us_hy_spread,US: High Yield Spread (BAML),US,Credit Spread,1996-12,2025-12,349
+dxy,US Dollar Index (DXY),US,Currencies,2006-01,2025-11,239
+us_cpi,US: CPI Inflation,US,Inflation,1947-01,2025-09,945
+fed_funds,US: Fed Funds Rate,US,Interest Rates,1954-07,2025-11,857
+vix,US: VIX Index,US,Market Volatility,1990-01,2025-12,432
+us_yield_curve_10y_2y,US: 10Y–2Y Yield Curve,US,Stress Indicator,1976-06,2025-12,595
