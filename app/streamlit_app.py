@@ -106,7 +106,7 @@ section[data-testid="stSidebar"] {
 
 # ------------------ HEADER ------------------ #
 st.title("🌐 Macro Time Machine")
-st.caption("Analyze historical macro cycles — with AI assistance.")
+st.caption("Analyze decades of macro data — with AI assistance.")
 
 
 # ------------------ LOAD METADATA ------------------ #
