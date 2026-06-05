@@ -353,7 +353,7 @@ if result is not None:
             return ""
 
     if "Change %" in df_display.columns:
-        styled = df_display.style.applymap(highlight_change, subset=["Change %"])
+        styled = df_display.style.map(highlight_change, subset=["Change %"])
         st.dataframe(styled, use_container_width=True)
     else:
         st.dataframe(df_display, use_container_width=True)
