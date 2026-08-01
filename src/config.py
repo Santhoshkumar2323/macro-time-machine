@@ -1,16 +1,11 @@
-# src/config.py
 from pathlib import Path
 
-# Base directory: the project root (where you run Python from)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_RAW_DIR = BASE_DIR / "data_raw"
 DATA_PROCESSED_DIR = BASE_DIR / "data_processed"
 METADATA_CSV_PATH = DATA_PROCESSED_DIR / "indicators_meta.csv"
 
-
-# Mapping from logical indicator_id -> file + display info.
-# You can adjust names later, but this is a solid starting point.
 INDICATOR_CONFIG = {
     "fed_funds": {
         "file": "fed_funds.csv",

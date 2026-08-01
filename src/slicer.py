@@ -1,15 +1,10 @@
-# src/slicer.py (updated with Change %)
 from dataclasses import dataclass
 from datetime import date
 from typing import Optional, Literal, Dict, Any
-
 import pandas as pd
-
 from .config import DATA_PROCESSED_DIR
 
-
 WindowType = Literal["1Y", "3Y", "5Y", "10Y", "20Y", "30Y"]
-
 
 @dataclass
 class SliceResult:
@@ -64,22 +59,12 @@ def slice_indicator(
     if sliced.empty:
         raise ValueError("Sliced data is empty for given parameters.")
 
-    # Ensure sorted monthly data
     sliced = sliced.sort_values("Date").reset_index(drop=True)
-
-    # ---- NEW FEATURE: Monthly Change % column ----
     sliced["Change %"] = sliced["Value"].pct_change() * 100
-
-    # Clean formatting: first row & inf/nan cases → 0.00%
     sliced["Change %"] = sliced["Change %"].fillna(0.0)
     sliced["Change %"] = sliced["Change %"].replace([float("inf"), float("-inf")], 0.0)
-
-    # Format to 2 decimals with % symbol
     sliced["Change %"] = sliced["Change %"].apply(lambda x: f"{x:.2f}%")
 
-    # ----------------------------------------------------
-
-    # Summary Stats (unchanged)
     start_val = sliced["Value"].iloc[0]
     end_val = sliced["Value"].iloc[-1]
     change = end_val - start_val

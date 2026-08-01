@@ -1,17 +1,10 @@
-# ===============================================================
-# Macro Time Machine — Neo-FinTech UI + AI Interpretation
-# ===============================================================
-
-# ------------------ PATH FIX ------------------ #
 import sys
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT_DIR))
 
-# ------------------ IMPORTS ------------------ #
 import os
-
 import streamlit as st
 import pandas as pd
 import google.generativeai as genai
@@ -21,7 +14,6 @@ from src.config import INDICATOR_CONFIG, METADATA_CSV_PATH
 from src.slicer import slice_indicator
 
 
-# ------------------ FORMATTER ------------------ #
 def fmt(n):
     try:
         return f"{n:,.2f}"
@@ -29,7 +21,6 @@ def fmt(n):
         return n
 
 
-# ------------------ ENV + GEMINI INIT ------------------ #
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY")
 GEMINI_AVAILABLE = bool(GEMINI_API_KEY)
 
@@ -37,14 +28,12 @@ if GEMINI_AVAILABLE:
     genai.configure(api_key=GEMINI_API_KEY)
 
 
-# ------------------ PAGE CONFIG ------------------ #
 st.set_page_config(
     page_title="Macro Time Machine",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-# ------------------ THEME STYLING ------------------ #
 st.markdown(
     """
 <style>
@@ -104,18 +93,14 @@ section[data-testid="stSidebar"] {
     unsafe_allow_html=True,
 )
 
-# ------------------ HEADER ------------------ #
 st.title("🌐 Macro Time Machine")
 st.caption("Analyze decades of macro data — with AI assistance.")
 
 
-# ------------------ LOAD METADATA ------------------ #
 if not METADATA_CSV_PATH.exists():
     build_metadata()
 meta_df = pd.read_csv(METADATA_CSV_PATH)
 
-
-# ------------------ SIDEBAR ------------------ #
 st.sidebar.header("🔍 Select Indicator")
 
 categories = sorted(meta_df["category"].unique())
@@ -139,11 +124,7 @@ end_year = col2.text_input("End (YYYY-MM)")
 load_btn = st.sidebar.button("Load Data 🔄")
 
 
-# ------------------ GEMINI PROMPT BUILDER ------------------ #
 def build_ai_prompt(indicator_id, indicator_display, summary, df_slice, start_str, end_str):
-    """
-    Build a STRICT, data-grounded prompt for Gemini.
-    """
     s = summary
     base_desc_map = {
         "us_cpi": "US consumer price inflation (headline CPI).",
@@ -162,7 +143,7 @@ def build_ai_prompt(indicator_id, indicator_display, summary, df_slice, start_st
     }
     base_desc = base_desc_map.get(indicator_id, "A macroeconomic or market time series.")
 
-    # Compact sample: first 3, middle 3, last 3
+
     if len(df_slice) <= 9:
         sample = df_slice
     else:
@@ -234,7 +215,6 @@ def call_gemini(prompt: str) -> str:
         return f"Error from Gemini: {e}"
 
 
-# ------------------ LOAD DATA + SESSION STATE ------------------ #
 result = None
 
 if load_btn:
@@ -244,13 +224,13 @@ if load_btn:
         else:
             result = slice_indicator(indicator_id, window=selected_window)
 
-        # Persist result and reset AI when new data is loaded
+
         st.session_state["latest_result"] = result
         st.session_state["ai_text"] = ""
     except Exception as e:
         st.error(f"⚠ Error: {e}")
 
-# If there is a stored result, reuse it when not pressing Load Data
+
 if "latest_result" in st.session_state and result is None:
     result = st.session_state["latest_result"]
 
@@ -296,7 +276,6 @@ if result is not None:
         )
 
     elif indicator_id == "us_yield_curve_10y_2y":
-        # Yield Curve: vertical-style summary
         spread_min = result.data["Value"].min()
         inverted_months = int((result.data["Value"] < 0).sum())
 
@@ -358,7 +337,7 @@ if result is not None:
     else:
         st.dataframe(df_display, use_container_width=True)
 
-    # ===== AI INTERPRETATION (BELOW TABLE) ===== #
+    # ===== AI INTERPRETATION ===== #
     st.markdown("---")
     st.subheader("🧠 AI Interpretation (Experimental)")
 

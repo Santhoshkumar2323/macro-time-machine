@@ -1,9 +1,6 @@
-# src/build_processed.py
-
 import sys
 from pathlib import Path
 
-# Ensure project root visibility for imports when script runs directly
 ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
@@ -16,7 +13,6 @@ from src.metadata import build_metadata
 def main() -> None:
     print("🧹 Cleaning and standardizing indicators to monthly...\n")
 
-    # Create processed folder if not present
     DATA_PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
     for indicator_id in INDICATOR_CONFIG.keys():
