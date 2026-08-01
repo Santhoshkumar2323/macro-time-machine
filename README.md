@@ -5,7 +5,7 @@ What this project is
 Macro Time Machine is a long-horizon macro data exploration system for analyzing economic and market indicators across decades of history.
 
 ## Architecture
-![Architecture Diagram](./architecture/how_it_works.svg)
+![Architecture Diagram](architecture/how_it_works.svg)
 
 What problem it solves
 
