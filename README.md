@@ -2,11 +2,8 @@
 
 A Streamlit app for viewing historical macroeconomic and market time series (US and India), with an optional AI-generated summary of the selected period using Gemini.
 
-<<<<<<< HEAD
-=======
 ## Architecture
 ![Architecture Diagram](./architecture/how_it_works.svg)
->>>>>>> ceb8dc0 (Local README edits with architecture diagram)
 
 ## Features
 
