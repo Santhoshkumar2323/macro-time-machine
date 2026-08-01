@@ -4,68 +4,6 @@ What this project is
 
 Macro Time Machine is a long-horizon macro data exploration system for analyzing economic and market indicators across decades of history.
 
-<img width="115" height="150" alt="how_it _works" src="https://github.com/user-attachments/assets/0e023502-591e-42cb-9f18-3be2f0ee1784" />
-<svg viewBox="0 0 1100 1434" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica,Arial,sans-serif">
-<rect x="0" y="0" width="1100" height="1434" fill="#ffffff"/>
-
-<defs>
-  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-    <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
-  </marker>
-</defs>
-
-<text x="550.0" y="46" text-anchor="middle" font-size="25" font-weight="800" fill="#111827">Macro Time Machine — How It Works</text>
-<text x="550.0" y="70" text-anchor="middle" font-size="13.5" fill="#6b7280">Cleans decades of raw macro data into a consistent monthly format, then lets you explore any time slice with AI-assisted interpretation</text>
-<text x="550.0" y="90" text-anchor="middle" font-size="11.5" fill="#9ca3af">(pill under each box = the source file that does it)</text>
-<text x="90" y="118" font-size="13" font-weight="800" letter-spacing="1.1" fill="#a16207" font-family="Helvetica,Arial,sans-serif">TRACK A — DATA PREP (RUN MANUALLY, WHENEVER RAW DATA CHANGES)</text>
-<rect x="90" y="142" width="940" height="142" rx="12" fill="#fef9c3" stroke="#a16207" stroke-width="1.8"/>
-<text x="560.0" y="173" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12" font-family="Helvetica,Arial,sans-serif">For each of 13 configured indicators, loads its raw CSV and automatically figures out which</text>
-<text x="560.0" y="195" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12" font-family="Helvetica,Arial,sans-serif">column is the date and which is the value</text>
-<text x="560.0" y="220" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">13 series across rates, inflation, bonds, credit spreads, volatility, commodities, and currencies for both the US and India</text>
-<rect x="478.65" y="233" width="162.70000000000002" height="26" rx="10" fill="#ffffff" stroke="#a16207" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="248" text-anchor="middle" font-size="11.5" fill="#a16207" font-family="Menlo,Consolas,monospace" font-weight="600">config.py → loader.py</text>
-<line x1="550.0" y1="284" x2="550.0" y2="324" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="324" width="940" height="138" rx="12" fill="#fef9c3" stroke="#a16207" stroke-width="1.8"/>
-<text x="560.0" y="355" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12" font-family="Helvetica,Arial,sans-serif">Standardizes every series to the same monthly rhythm</text>
-<text x="560.0" y="380" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Daily data (like VIX or FX) is resampled down to one month-end value; already-monthly data is just aligned to month-end — so every</text>
-<text x="560.0" y="398" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">indicator lines up on the same calendar</text>
-<rect x="425.05" y="411" width="269.9" height="26" rx="10" fill="#ffffff" stroke="#a16207" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="426" text-anchor="middle" font-size="11.5" fill="#a16207" font-family="Menlo,Consolas,monospace" font-weight="600">cleaner.py → standardize_to_monthly()</text>
-<line x1="550.0" y1="462" x2="550.0" y2="502" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="502" width="940" height="120" rx="12" fill="#fef9c3" stroke="#a16207" stroke-width="1.8"/>
-<text x="560.0" y="533" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12" font-family="Helvetica,Arial,sans-serif">Saves each cleaned indicator, then scans all of them to build one metadata table</text>
-<text x="560.0" y="558" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">That metadata file (id, category, country, date range, row count) is what powers the app's sidebar — nothing there is hardcoded</text>
-<rect x="368.1" y="571" width="383.8" height="26" rx="10" fill="#ffffff" stroke="#a16207" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="586" text-anchor="middle" font-size="11.5" fill="#a16207" font-family="Menlo,Consolas,monospace" font-weight="600">build_processed.py → metadata.py → indicators_meta.csv</text>
-<line x1="90" y1="652" x2="1010" y2="652" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="4,4"/>
-<text x="90" y="692" font-size="13" font-weight="800" letter-spacing="1.1" fill="#1d4ed8" font-family="Helvetica,Arial,sans-serif">TRACK B — THE INTERACTIVE APP (STREAMLIT_APP.PY)</text>
-<rect x="90" y="716" width="940" height="120" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.8"/>
-<text x="560.0" y="747" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">Pick a category, an indicator, and a time window in the sidebar</text>
-<text x="560.0" y="772" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Quick-select windows (1Y through 30Y) or a custom start/end month — metadata built in Track A is what fills these dropdowns</text>
-<rect x="461.9" y="785" width="196.20000000000002" height="26" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="800" text-anchor="middle" font-size="11.5" fill="#1d4ed8" font-family="Menlo,Consolas,monospace" font-weight="600">streamlit_app.py → sidebar</text>
-<line x1="550.0" y1="836" x2="550.0" y2="876" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="876" width="940" height="120" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.8"/>
-<text x="560.0" y="907" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">Slices the processed data to exactly that window and computes summary stats</text>
-<text x="560.0" y="932" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Start/end value, absolute and percent change, min/max/average, plus a month-over-month % change column</text>
-<rect x="451.85" y="945" width="216.3" height="26" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="960" text-anchor="middle" font-size="11.5" fill="#1d4ed8" font-family="Menlo,Consolas,monospace" font-weight="600">slicer.py → slice_indicator()</text>
-<line x1="550.0" y1="996" x2="550.0" y2="1036" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="1036" width="940" height="160" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.8"/>
-<text x="560.0" y="1067" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">Displays the result: summary chips, a color-coded monthly table, and special layouts for two</text>
-<text x="560.0" y="1089" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">indicators</text>
-<text x="560.0" y="1114" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">The yield curve gets an inversion count (months below zero); VIX gets a max-spike and “Fear Spike” flag above 40 — every other</text>
-<text x="560.0" y="1132" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">indicator uses the standard 4-chip layout</text>
-<rect x="435.1" y="1145" width="249.8" height="26" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="1160" text-anchor="middle" font-size="11.5" fill="#1d4ed8" font-family="Menlo,Consolas,monospace" font-weight="600">streamlit_app.py → display section</text>
-<line x1="550.0" y1="1196" x2="550.0" y2="1236" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="90" y="1236" width="940" height="138" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.8"/>
-<text x="560.0" y="1267" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">Optional: asks Gemini to interpret this exact slice in plain language</text>
-<text x="560.0" y="1292" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">The prompt is deliberately strict — only the real summary numbers and a few sampled data points go in, with explicit instructions not</text>
-<text x="560.0" y="1310" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">to invent outside events, not to reference anything not shown, and never to give trading advice</text>
-<rect x="374.79999999999995" y="1323" width="370.40000000000003" height="26" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.9"/>
-<text x="560.0" y="1338" text-anchor="middle" font-size="11.5" fill="#1d4ed8" font-family="Menlo,Consolas,monospace" font-weight="600">streamlit_app.py → build_ai_prompt() + call_gemini()</text>
-</svg>
 
 What problem it solves
 
